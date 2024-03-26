@@ -17,7 +17,7 @@ Codes are coming soon.
 ```
 @inproceedings{shao2024DeIL,
   title={DeIL: Direct-and-Inverse CLIP for Open-World Few-Shot Learning},
-  author={Shao, Shuai and Bai, Yu and Wang, Yan and Liu, Baodi and Yicong Zhou},
+  author={Shao, Shuai and Bai, Yu and Wang, Yan and Liu, Baodi and Zhou, Yicong},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year={2024}
 }
