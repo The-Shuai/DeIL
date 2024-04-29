@@ -12,7 +12,10 @@ DeIL comprises two key components: a pre-trainer (frozen) for data denoising, an
 ![图片1](https://github.com/The-Shuai/DeIL/blob/main/Figures/flowchart.png)
 
 ## Get Started
-Codes are coming soon.
+1. Create a conda environment and install dependencies.
+```
+pip install -r requirements.txt
+```
 
 ## Citation
 ```
