@@ -9,6 +9,9 @@ Amidst this backdrop, we unveil the **D**ir**e**ct-and-**I**nverse C**L**IP (**D
 This concept transforms conventional single-step classification into a nuanced two-stage process: initially filtering out less probable categories, followed by accurately determining the specific category of samples.
 DeIL comprises two key components: a pre-trainer (frozen) for data denoising, and an adapter (tunable) for achieving precise final classification.
 
+![图片1](https://github.com/The-Shuai/CO3/assets/56874070/e6f9854b-5d75-4da9-98fd-9c93fdde7fc2)
+An example to introduce the concept of Direct-and-Inverse.
+It is a 4-way classification task. The traditional method directly categorizes the data (Upper). Our method, however, splits this into a two-step process (Lower). The first phase filters out the less probable classes, simplifying the task from 4-way to 3-way classification. The second phase then precisely identifies the category of samples. This two-step approach streamlines the decision-making process by narrowing down choices, consequently decreasing the likelihood of misclassification and enhancing overall accuracy.
 
 ## Get Started
 Codes are coming soon.
