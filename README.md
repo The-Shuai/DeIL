@@ -17,11 +17,18 @@ DeIL comprises two key components: a pre-trainer (frozen) for data denoising, an
 pip install -r requirements.txt
 ```
 2. Download the ["cache"](https://drive.google.com/file/d/1cgIj_ZZUndLVbmVU-XxwySyV29fkl_I6/view?usp=drive_link), ["clipn_cache"](https://drive.google.com/file/d/1cgIj_ZZUndLVbmVU-XxwySyV29fkl_I6/view?usp=drive_link), ["gpt_file"](https://drive.google.com/file/d/1cgIj_ZZUndLVbmVU-XxwySyV29fkl_I6/view?usp=drive_link) folders, and place them in the root directory.
-
 3. Download the [CLIPN pre-trained model](https://drive.google.com/drive/folders/1eNaaPaRWz0La8_qQliX30A4I7Y44yDMY) and place it in the "clipn_cache" directory.   
    e.g., "./clipn_cache/CLIPN_ATD_Repeat2_epoch_10.pt".  
    (please refer to [CLIPN](https://github.com/xmed-lab/CLIPN) for more details)
-
+4. Follow [Download_OFSL_Datasets.md](https://github.com/The-Shuai/CO3/blob/main/Download_OFSL_Datasets.md) to download the datasets.
+5. Modify the ```main_path``` in the [main.py](https://github.com/The-Shuai/CO3/blob/main/main.py) file on line 22 to match the dataset you intend to validate.      
+   e.g., set the ```main_path``` to ```main_path = "./configs/imagenet/config.yaml"```
+6. Modify the ```root_path``` on the 2nd line of the ```config.yaml``` file corresponding to your dataset.    
+   e.g., within the ```./configs/imagenet/config.yaml``` file, update the ```root_path``` to ```root_path: "./DATA/"```
+7. Run
+```
+CUDA_VISIBLE_DEVICES=0 python main.py
+```
    
 ## Citation
 ```
