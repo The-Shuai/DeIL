@@ -1,0 +1,49 @@
+# ------ root_path ------
+root_path: '/home/SS/datasets/CaFo_data/DATA/'
+
+
+# ------ Load Cache and Features ------
+load_pre_clipn: True
+load_cache: False
+
+# ------ Hyperparamters ------
+search_hp: True
+# search_hp: False
+
+search_scale: [20, 10]
+search_step: [200, 20]
+
+beta: 1
+alpha: 0.2
+gamma: 0.1
+threshold: 0.5
+
+gpt3_prompt_file: './gpt_file/food101_prompt.json'
+
+# ------ Basic Config ------
+dataset: 'food-101'
+shots: 16
+clip_backbone: 'RN50'
+clipn_backbone: 'ViT-B-16'
+num_classes: 101
+positive_num: 1
+negative_num: 10
+anchor_num_per_class: 2
+
+# ------ Dalle Dataset -----
+dalle_dataset: 'dalle_food'
+dalle_shots: 8
+
+lr: 0.001
+augment_epoch: 1
+# train_epoch: 200
+train_epoch: 70
+
+# ------ Open World ------
+openset: 'openset'
+open_world: 
+  is_open_world: True  # True or False
+  clean_dataset: True # True or False
+  nlb: 0.3 # noise label
+  # ds: 0.0 # domain shift
+  ood: 0.0 # out of distribution

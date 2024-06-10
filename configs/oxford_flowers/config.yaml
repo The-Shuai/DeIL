@@ -1,0 +1,48 @@
+# ------ root_path ------
+root_path: '/home/SS/datasets/CaFo_data/DATA/'
+
+
+# ------ Load Cache and Features ------
+load_pre_clipn: True
+load_cache: True
+
+# ------ Hyperparamters ------
+search_hp: False
+
+search_scale: [50, 50]
+search_step: [200, 20]
+
+beta: 0.5
+alpha: 1.2
+gamma: 0.1
+threshold: 0.5
+
+gpt3_prompt_file: './gpt_file/oxford_flowers_prompt.json'
+
+# ------ Basic Config ------
+dataset: 'oxford_flowers'
+shots: 2
+clip_backbone: 'RN50'
+clipn_backbone: 'ViT-B-16'
+num_classes: 102
+positive_num: 1
+negative_num: 10
+anchor_num_per_class: 2
+
+
+# ------ Dalle Dataset -----
+dalle_dataset: 'dalle_flowers'
+dalle_shots: 8
+
+lr: 0.001
+augment_epoch: 1
+train_epoch: 80
+
+# ------ Open World ------
+openset: 'openset'
+open_world: 
+  is_open_world: True  # True or False
+  clean_dataset: True # True or False
+  nlb: 0.3 # noise label
+  # ds: 0.0 # domain shift
+  ood: 0.0 # out of distribution
