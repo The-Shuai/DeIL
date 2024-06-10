@@ -21,7 +21,7 @@ pip install -r requirements.txt
    e.g., "./clipn_cache/CLIPN_ATD_Repeat2_epoch_10.pt".  
    (please refer to [CLIPN](https://github.com/xmed-lab/CLIPN) for more details)
 4. Follow [Download_OFSL_Datasets.md](https://github.com/The-Shuai/CO3/blob/main/Download_OFSL_Datasets.md) to download the datasets.
-5. Modify the ```main_path``` in the [main.py](https://github.com/The-Shuai/CO3/blob/main/main.py) file on line 22 to match the dataset you intend to validate.      
+5. Modify the ```main_path``` in the [main.py](https://github.com/The-Shuai/CO3/blob/main/main.py) file on line 26 to match the dataset you intend to validate.      
    e.g., set the ```main_path``` to ```main_path = "./configs/imagenet/config.yaml"```
 6. Modify the ```root_path``` on the 2nd line of the ```config.yaml``` file corresponding to your dataset.    
    e.g., within the ```./configs/imagenet/config.yaml``` file, update the ```root_path``` to ```root_path: "./DATA/"```
