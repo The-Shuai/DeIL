@@ -16,9 +16,7 @@ DeIL comprises two key components: a pre-trainer (frozen) for data denoising, an
 ```
 pip install -r requirements.txt
 ```
-2. Download the "cache" folder from [here](https://drive.google.com/file/d/1cgIj_ZZUndLVbmVU-XxwySyV29fkl_I6/view?usp=drive_link) and place it in the root directory.
-3. Download the "clipn_cache" folder from [here](https://drive.google.com/file/d/1cgIj_ZZUndLVbmVU-XxwySyV29fkl_I6/view?usp=drive_link) and place it in the root directory.
-
+2. Download the ["cache"](https://drive.google.com/file/d/1cgIj_ZZUndLVbmVU-XxwySyV29fkl_I6/view?usp=drive_link), ["clipn_cache"](https://drive.google.com/file/d/1cgIj_ZZUndLVbmVU-XxwySyV29fkl_I6/view?usp=drive_link), ["gpt_file"](https://drive.google.com/file/d/1cgIj_ZZUndLVbmVU-XxwySyV29fkl_I6/view?usp=drive_link) folders, and place them in the root directory.
 
 ## Citation
 ```
