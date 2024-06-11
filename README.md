@@ -29,7 +29,8 @@ pip install -r requirements.txt
 ```
 CUDA_VISIBLE_DEVICES=0 python main.py
 ```
-   
+## Acknowledgement
+This repo benefits from [CLIPN](https://github.com/xmed-lab/CLIPN), [CaFo](https://github.com/OpenGVLab/CaFo?tab=readme-ov-file), [CLIP](https://github.com/openai/CLIP), and [DALL-E](https://github.com/borisdayma/dalle-mini). Thanks for their wonderful work.   
 ## Citation
 ```
 @inproceedings{shao2024DeIL,
