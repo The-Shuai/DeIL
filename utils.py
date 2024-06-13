@@ -378,23 +378,23 @@ def select_anchor_positive_negative(epoch, categories, cfg, dalle_data_dict, tra
     train_probs_no = train_data_dict['probs_no']
     train_lbs = train_data_dict['lbs']
 
-    data_from = 'dalle_data' # 表示anchor来自哪里，是训练数据还是dalle生成的数据。dalle_data表示dalle生成的数据，train_data表示训练数据 
+    data_from = 'dalle_data' 
     anchor_idx_lst, positive_idx_lst, negative_idx_lst = [], [], []
-    if epoch == 0: # 如果是第一个epoch, 从dalle生成的图像中，根据CLIP的置信度选取一个作为anchor
+    if epoch == 0: 
         
         for anchor_category in categories:
-            dalle_indices = (dalle_lbs == anchor_category).nonzero().flatten()# 从dalle生成样本中，挑选anchor_category类所对应的所有样本        
-            dalle_logits = dalle_logits_yes[dalle_indices] # 选取标签等于 anchor_category 类的这些置信度
+            dalle_indices = (dalle_lbs == anchor_category).nonzero().flatten()     
+            dalle_logits = dalle_logits_yes[dalle_indices] 
             sorted_yes_idx = torch.argsort(dalle_logits[:,anchor_category].view(-1), descending=True)
 
             # 选择anchor
             max_confidence_indices = sorted_yes_idx[:anchor_num_per_class]           
-            anchor_indices = dalle_indices[max_confidence_indices] # 最后得到anchor的索引
+            anchor_indices = dalle_indices[max_confidence_indices] 
 
             for anchor_idx in anchor_indices:
                 anchor_idx_lst.append([data_from, torch.tensor(anchor_idx).cuda(), anchor_category])
 
-            # 选择1个positive样本
+            
             for positive_idx_tmp in sorted_yes_idx[1:(cfg['positive_num']+1)]:
                 positive_idx = dalle_indices[positive_idx_tmp] 
                 positive_idx_lst.append([data_from, torch.tensor(positive_idx).cuda(), anchor_category])
@@ -403,9 +403,9 @@ def select_anchor_positive_negative(epoch, categories, cfg, dalle_data_dict, tra
             # if positive_idx_lst != positive_idx_lst:
             #     print('00000000000')
 
-            # 选择20个negative样本
-            dalle_indices_negative = (dalle_lbs != anchor_category).nonzero().flatten().tolist() # 从dalle生成样本中，挑选不是anchor_category类所对应的所有样本  
-            dalle_probs_no_negative = dalle_probs_no[dalle_indices_negative] # 选取标签不等于 anchor_category 类的这些概率
+            
+            dalle_indices_negative = (dalle_lbs != anchor_category).nonzero().flatten().tolist()   
+            dalle_probs_no_negative = dalle_probs_no[dalle_indices_negative] 
             dalle_lbs_negative = dalle_lbs[dalle_indices_negative]
             sorted_no_idx = torch.argsort(dalle_probs_no_negative[:,anchor_category].view(-1), descending=True)
 
@@ -418,14 +418,14 @@ def select_anchor_positive_negative(epoch, categories, cfg, dalle_data_dict, tra
             # if negative_idx_lst != negative_idx_lst_:
             #     print('11111111111')
 
-    else: # 如果不是第一个epoch, 从dalle生成的图像和原始图像中，根据adapter的置信度选取一个作为anchor
+    else: 
         for anchor_category in categories:
             
-            dalle_indices = (dalle_lbs == anchor_category).nonzero().flatten() # 从dalle生成样本中，挑选anchor_category类所对应的所有样本     
-            dalle_logits = dalle_logits_yes[dalle_indices] # 选取标签等于 anchor_category 类的这些置信度
+            dalle_indices = (dalle_lbs == anchor_category).nonzero().flatten()      
+            dalle_logits = dalle_logits_yes[dalle_indices] 
             
-            train_pred_indices = (train_pred_lbs == anchor_category).nonzero().flatten()# 从训练样本中，挑选anchor_category类所对应的所有样本    
-            train_logits = train_logits_yes[train_pred_indices] # 选取标签等于 anchor_category 类的这些置信度
+            train_pred_indices = (train_pred_lbs == anchor_category).nonzero().flatten() 
+            train_logits = train_logits_yes[train_pred_indices] 
 
             logits = torch.cat([dalle_logits,train_logits],dim=0)
             probs = torch.softmax(logits, dim=0)
@@ -434,46 +434,46 @@ def select_anchor_positive_negative(epoch, categories, cfg, dalle_data_dict, tra
             # 选择anchor
             max_confidence_indices = sorted_yes_idx[:anchor_num_per_class]
             for max_confidence_idx in max_confidence_indices:
-                if max_confidence_idx > cfg['dalle_shots'] - 1: # anchor的索引来自训练数据
+                if max_confidence_idx > cfg['dalle_shots'] - 1: 
                     max_confidence_idx = max_confidence_idx - cfg['dalle_shots']
                     anchor_idx = train_pred_indices[max_confidence_idx] 
                     data_from = 'train_data'
-                else: # anchor的索引来自dalle生成的数据
+                else: 
                     anchor_idx = dalle_indices[max_confidence_idx] 
                     data_from = 'dalle_data'                
                 anchor_idx_lst.append([data_from, torch.tensor(anchor_idx).cuda(), anchor_category])
 
-            # 选择5个positive样本
+            
             for positive_idx_tmp in sorted_yes_idx[1:(cfg['positive_num']+1)]:
-                if positive_idx_tmp > len(dalle_indices) - 1: # positive的索引来自训练数据
+                if positive_idx_tmp > len(dalle_indices) - 1: 
                     positive_idx_tmp = positive_idx_tmp - len(dalle_indices)
                     positive_idx = train_pred_indices[positive_idx_tmp] 
                     data_from = 'train_data'
-                else: # positive的索引来自dalle生成的数据
+                else: 
                     positive_idx = dalle_indices[positive_idx_tmp] 
                     data_from = 'dalle_data' 
                 positive_idx_lst.append([data_from, torch.tensor(positive_idx).cuda(), anchor_category])
 
 
             # 选择20个negative样本
-            dalle_indices_negative = (dalle_lbs != anchor_category).nonzero().flatten().tolist() # 从dalle生成样本中，挑选不是anchor_category类所对应的所有样本  
-            dalle_probs_no_negative = dalle_probs_no[dalle_indices_negative] # 选取标签不等于 anchor_category 类的这些概率
+            dalle_indices_negative = (dalle_lbs != anchor_category).nonzero().flatten().tolist()  
+            dalle_probs_no_negative = dalle_probs_no[dalle_indices_negative] 
             dalle_lbs_negative = dalle_lbs[dalle_indices_negative]
 
-            train_pred_indices_negative = (train_pred_lbs != anchor_category).nonzero().flatten().tolist() # 从训练样本中，挑选不是anchor_category类所对应的所有样本    
-            train_probs_no_negative = train_probs_no[train_pred_indices_negative] # 选取标签不等于 anchor_category 类的这些置信度
+            train_pred_indices_negative = (train_pred_lbs != anchor_category).nonzero().flatten().tolist()  
+            train_probs_no_negative = train_probs_no[train_pred_indices_negative] 
             train_lbs_negative = train_lbs[train_pred_indices_negative]
 
             no_probs = torch.cat([dalle_probs_no_negative,train_probs_no_negative],dim=0)
             sorted_no_idx = torch.argsort(no_probs[:,anchor_category].view(-1), descending=True)
 
             for negative_idx_tmp in sorted_no_idx[0:cfg['negative_num']]:
-                if negative_idx_tmp > len(dalle_indices_negative) - 1: # negative 的索引来自训练数据
+                if negative_idx_tmp > len(dalle_indices_negative) - 1: 
                     negative_idx_tmp = negative_idx_tmp - len(dalle_indices_negative)
                     negative_lb = train_lbs_negative[negative_idx_tmp]
                     negative_idx = train_pred_indices_negative[negative_idx_tmp] 
                     data_from = 'train_data'
-                else: # negative 的索引来自dalle生成的数据
+                else: 
                     negative_lb = dalle_lbs_negative[negative_idx_tmp]
                     negative_idx = dalle_indices_negative[negative_idx_tmp] 
                     data_from = 'dalle_data' 
@@ -537,7 +537,7 @@ def get_contrastive_data(epoch, adapter, categories, cfg, dalle_data_dict, train
     dalle_adapter_logits_ = ((-1) * (beta - beta * dalle_adapter_logits)).exp()
     dalle_cls_logits = dalle_logits_yes +  alpha * dalle_adapter_logits_
 
-    if epoch == 0: # 第一个epoch里，在挑选 contrastive_data 时用的是 zero_shot_clip 分类器，但是在后面计算对比损失时，却需要 adapter 后的特征
+    if epoch == 0: 
         
         dalle_data_dict_tmp = {
         'img_feas': dalle_adapter_feas,
