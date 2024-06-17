@@ -33,10 +33,12 @@ CUDA_VISIBLE_DEVICES=0 python main.py
 This repo benefits from [CLIPN](https://github.com/xmed-lab/CLIPN), [CaFo](https://github.com/OpenGVLab/CaFo?tab=readme-ov-file), [CLIP](https://github.com/openai/CLIP), and [DALL-E](https://github.com/borisdayma/dalle-mini). Thanks for their wonderful work.   
 ## Citation
 ```
-@inproceedings{shao2024DeIL,
+@inproceedings{shao2024deil,
   title={DeIL: Direct-and-Inverse CLIP for Open-World Few-Shot Learning},
   author={Shao, Shuai and Bai, Yu and Wang, Yan and Liu, Baodi and Zhou, Yicong},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={28505--28514},
   year={2024}
 }
+
 ```
