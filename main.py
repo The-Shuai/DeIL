@@ -273,13 +273,13 @@ def main():
     classname_clip_text_feas = gpt_clip_classifier(dataset.classnames, gpt3_prompt, clip_model, dataset.template)
 
 
-    # train-data: image features, labels, paths, zero-shot logits_yes，zero-shot logits_no
+    # train-data: image features, labels, gt_labels, zero-shot logits_yes，zero-shot logits_no
     train_data_dict = pretrain(cfg, classname_clip_text_feas, clip_model, clipn_classifier, train_loader, split='train') # data_dict = {'img_feas': img_feas, 'lbs': lbs, 'impaths': impaths, 'logits_yes': logits_yes, 'logits_no': logits_no}
 
-    # dalle-generated-data: image features, labels, paths, zero-shot logits_yes，zero-shot logits_no
+    # dalle-generated-data: image features, labels, gt_labels, zero-shot logits_yes，zero-shot logits_no
     dalle_data_dict = pretrain(cfg, classname_clip_text_feas, clip_model, clipn_classifier, dalle_train_loader, split='dalle') # data_dict = {'img_feas': img_feas, 'lbs': lbs, 'impaths': impaths, 'logits_yes': logits_yes, 'logits_no': logits_no}
 
-    # test-data: image features, labels, paths, zero-shot logits_yes，zero-shot logits_no
+    # test-data: image features, labels, gt_labels, zero-shot logits_yes，zero-shot logits_no
     test_data_dict = pretrain(cfg, classname_clip_text_feas, clip_model, clipn_classifier, test_loader, split='test') # data_dict = {'img_feas': img_feas, 'lbs': lbs, 'impaths': impaths, 'logits_yes': logits_yes, 'logits_no': logits_no}
 
 
