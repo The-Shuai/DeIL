@@ -16,7 +16,7 @@ DeIL comprises two key components: a pre-trainer (frozen) for data denoising, an
 ```
 pip install -r requirements.txt
 ```
-2. Download the ["cache", "clipn_cache", "gpt_file" folders](https://drive.google.com/drive/u/0/folders/1mru7WbzqJ1XjDYGlbFQ_6kjLRU4aexvS), and place them in the root directory.
+2. Download the ["cache", "clipn_caches", "gpt_file" folders](https://drive.google.com/drive/u/0/folders/1mru7WbzqJ1XjDYGlbFQ_6kjLRU4aexvS), and place them in the root directory.
 3. Download the [CLIPN pre-trained model](https://drive.google.com/drive/folders/1eNaaPaRWz0La8_qQliX30A4I7Y44yDMY) and place it in the "clipn_cache" directory.   
    e.g., "./clipn_cache/CLIPN_ATD_Repeat2_epoch_10.pt".  
    (please refer to [CLIPN](https://github.com/xmed-lab/CLIPN) for more details)
