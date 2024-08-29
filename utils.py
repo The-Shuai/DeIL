@@ -207,9 +207,9 @@ def pretrain(cfg, classname_clip_text_feas, clip, clipn, loader, split):
         torch.save(lbs, cfg['cache_dir'] + "/" + split + shots + nlb + "lbs.pt")
         torch.save(gt_lbs, cfg['cache_dir'] + "/" + split + shots + "gt_lbs.pt")
 
-        # file_name = cfg['cache_dir'] + "/" +  split + shots + "impaths.pt"
-        # with open(file_name, 'wb') as file:
-        #     pickle.dump(impaths, file)
+        file_name = cfg['cache_dir'] + "/" +  split + shots + "impaths.pt"
+        with open(file_name, 'wb') as file:
+            pickle.dump(impaths, file)
 
 
         torch.save(pred_lbs, cfg['cache_dir'] + "/" + split + shots + "pred_lbs.pt")
@@ -223,9 +223,9 @@ def pretrain(cfg, classname_clip_text_feas, clip, clipn, loader, split):
         lbs = torch.load(cfg['cache_dir'] + "/" + split + shots + nlb + "lbs.pt")
         gt_lbs = torch.load(cfg['cache_dir'] + "/" + split + shots + "gt_lbs.pt")
 
-        # file_name = cfg['cache_dir'] + "/" + split + shots + "impaths.pt"
-        # with open(file_name, 'rb') as file:
-        #     impaths = pickle.load(file)
+        file_name = cfg['cache_dir'] + "/" + split + shots + "impaths.pt"
+        with open(file_name, 'rb') as file:
+            impaths = pickle.load(file)
 
     data_dict = {
     'img_feas': img_feas,
